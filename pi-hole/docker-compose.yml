@@ -9,6 +9,7 @@ services:
     environment:
       TZ: 'Europe/Berlin'
       DNSMASQ_LISTENING: 'all'
+      PASSWORD: 'password'
     volumes:
       - '/srv/pihole/pihole:/etc/pihole'
       - '/srv/pihole/dnsmasq.d:/etc/dnsmasq.d'

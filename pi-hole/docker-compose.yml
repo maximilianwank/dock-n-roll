@@ -10,6 +10,7 @@ services:
       TZ: 'Europe/Berlin'
       DNSMASQ_LISTENING: 'all'
       PASSWORD: 'password'
+      VIRTUAL_HOST: 'pi4.internal'
     volumes:
       - '/srv/pihole/pihole:/etc/pihole'
       - '/srv/pihole/dnsmasq.d:/etc/dnsmasq.d'

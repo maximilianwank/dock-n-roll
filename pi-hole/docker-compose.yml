@@ -11,8 +11,8 @@ services:
       TZ: 'Europe/Berlin'
       # WEBPASSWORD: 'set a secure password here or it will be random'
     volumes:
-      - './etc-pihole:/etc/pihole'
-      - './etc-dnsmasq.d:/etc/dnsmasq.d'
+      - '/srv/pihole/pihole:/etc/pihole'
+      - '/srv/pihole/dnsmasq.d:/etc/dnsmasq.d'
     cap_add:
       - NET_ADMIN
     restart: unless-stopped

@@ -2,6 +2,7 @@ services:
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
+    hostname: pi4
     ports:
       - "53:53/tcp"
       - "53:53/udp"
@@ -10,7 +11,6 @@ services:
       TZ: 'Europe/Berlin'
       DNSMASQ_LISTENING: 'all'
       PASSWORD: 'password'
-      VIRTUAL_HOST: 'pi4.internal'
     volumes:
       - '/srv/pihole/pihole:/etc/pihole'
       - '/srv/pihole/dnsmasq.d:/etc/dnsmasq.d'

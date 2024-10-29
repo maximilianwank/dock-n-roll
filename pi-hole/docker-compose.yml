@@ -14,3 +14,5 @@ services:
       - '/srv/pihole/pihole:/etc/pihole'
       - '/srv/pihole/dnsmasq.d:/etc/dnsmasq.d'
     restart: unless-stopped
+  dns:
+    - 127.0.0.1

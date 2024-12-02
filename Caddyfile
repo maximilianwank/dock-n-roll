@@ -1,0 +1,24 @@
+{$DOMAIN}
+
+log {
+  level DEBUG
+  output file {$LOG_FILE} {
+    roll_size 10MB
+    roll_keep 10
+  }
+}
+
+# handle_path /vault/notifications/hub* {
+#   reverse_proxy vaultwarden:3012
+# }
+
+handle_path /vault* {
+  reverse_proxy vaultwarden:80 {
+    header_up X-Real-IP {remote_host}
+  }
+}
+
+
+handle_path /pihole* {
+  reverse_proxy pihole-tmp:80
+}

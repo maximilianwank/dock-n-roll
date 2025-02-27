@@ -1,10 +1,10 @@
-# dock-n-roll
+# :whale2: dock-n-roll
 
 Setup for my ["homelab"](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/) with docker containers.
 
-## Tips & Tricks
+## :information_source: Tips & Tricks
 
-### Backup restore
+### :previous_track_button: Backup restore
 
 If necessary, stop the containers
 

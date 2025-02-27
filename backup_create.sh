@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Read config data from .env
-source ./.env
+source .env
 
 # Define the path for the backup file
 DAY_OF_WEEK=$(date +%A | tr '[:upper:]' '[:lower:]')

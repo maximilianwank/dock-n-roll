@@ -29,7 +29,7 @@ services:
       EMAIL: "${EMAIL}"
       LOG_FILE: "/data/access.log"
     dns:
-      - 127.0.0.1
+      - 8.8.8.8
   pihole:
     container_name: pihole
     image: pihole/pihole:latest

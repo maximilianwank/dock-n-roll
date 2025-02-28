@@ -11,7 +11,17 @@ Setup for my ["homelab"](https://www.raspberrypi.com/products/raspberry-pi-4-mod
 
 ## :information_source: Tips & Tricks
 
-### :previous_track_button: Backup restore
+### :robot: Automate Creation of Backup
+
+You can make cron run the backup script, for example by adding the line
+
+```text
+0 4 * * * /path/to/dock-n-roll/backup_create.sh
+```
+
+to your crontab.
+
+### :previous_track_button: Backup Restore
 
 If necessary, stop the containers
 

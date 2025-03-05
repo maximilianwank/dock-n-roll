@@ -16,7 +16,7 @@ Setup for my ["homelab"](https://www.raspberrypi.com/products/raspberry-pi-4-mod
 You can make cron run the backup script, for example by adding the line
 
 ```text
-0 4 * * * /path/to/dock-n-roll/backup_create.sh
+0 4 * * * cd /path/to/dock-n-roll && ./backup_create.sh
 ```
 
 to your crontab.

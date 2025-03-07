@@ -20,8 +20,9 @@ services:
       - "80:80"  # Needed for the ACME HTTP-01 challenge.
       - "443:443"
       - "443:443/udp"  # Needed for HTTP/3.
+      - "314:314"
     volumes:
-      - "${DOCKER_VOLUMES}/caddy/Caddyfile:/etc/caddy/Caddyfile:ro"
+      - "${DOCKER_VOLUMES}/caddy/Caddyfile:/etc/caddy/Caddyfile"
       - "${DOCKER_VOLUMES}/caddy/config:/config"
       - "${DOCKER_VOLUMES}/caddy/data:/data"
     environment:
@@ -43,6 +44,6 @@ services:
     hostname: pi4
     environment:
       TZ: 'Europe/Berlin'
-      DNSMASQ_LISTENING: 'all'
+      FTLCONF_dns_listeningMode: 'all'
     dns:
       - 127.0.0.1

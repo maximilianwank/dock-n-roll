@@ -1,13 +1,16 @@
 # :whale2: dock-n-roll
 
-Setup for my ["homelab"](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/) with docker containers.
+Setup for my "[homelab](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)" with docker containers.
+
+This project is still under development and therefore not very stable or well documented.
 
 ## :construction_worker_man: Setup
 
 1. Clone the repository
 2. Copy `.env.template` to `.env`
 3. Modify `.env` respecitvely
-4. Run `docker-compose  -f ./docker-compose.yml up -d`
+4. Copy `Caddyfile` to the docker volumes
+5. Run `docker-compose up -d`
 
 ## :information_source: Tips & Tricks
 
@@ -39,6 +42,14 @@ Copy the docker_volumes folder
 
 ```bash
 cp -r zip_restore/home/maxi/docker_volumes docker_volumes
+```
+
+### :truck: Caddy
+
+Reload the config file via
+
+```bash
+docker exec -it caddy caddy reload -c /etc/caddy/Caddyfile
 ```
 
 ### :hole: Pi-hole

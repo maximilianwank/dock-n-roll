@@ -41,6 +41,14 @@ Copy the docker_volumes folder
 cp -r zip_restore/home/maxi/docker_volumes docker_volumes
 ```
 
+### :truck: Caddy
+
+Reload the config file via
+
+```bash
+docker exec -it caddy caddy reload -c /etc/caddy/Caddyfile
+```
+
 ### :hole: Pi-hole
 
 Set the admin password via running

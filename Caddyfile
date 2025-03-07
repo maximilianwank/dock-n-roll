@@ -17,3 +17,8 @@
 		}
 	}
 }
+
+{$DOMAIN}:314 {
+	redir / /admin{uri}
+	reverse_proxy pihole:80
+}

@@ -20,6 +20,7 @@ services:
       - "80:80"  # Needed for the ACME HTTP-01 challenge.
       - "443:443"
       - "443:443/udp"  # Needed for HTTP/3.
+      - "314:314"
     volumes:
       - "${DOCKER_VOLUMES}/caddy/Caddyfile:/etc/caddy/Caddyfile"
       - "${DOCKER_VOLUMES}/caddy/config:/config"
@@ -37,7 +38,6 @@ services:
     ports:
       - "53:53/tcp"
       - "53:53/udp"
-      - "8080:80"
     volumes:
       - '${DOCKER_VOLUMES}/pihole/pihole:/etc/pihole'
       - '${DOCKER_VOLUMES}/pihole/dnsmasq.d:/etc/dnsmasq.d'

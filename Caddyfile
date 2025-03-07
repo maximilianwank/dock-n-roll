@@ -1,4 +1,4 @@
-{$DOMAIN} {
+{
 	log {
 		level DEBUG
 		output file {$LOG_FILE} {
@@ -6,7 +6,9 @@
 			roll_keep 10
 		}
 	}
+}
 
+{$DOMAIN} {
 	# handle_path /vault/notifications/hub* {
 	#   reverse_proxy vaultwarden:3012
 	# }

@@ -2,6 +2,8 @@
 
 Setup for my "[homelab](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)" with docker containers.
 
+This project is still under development and therefore not very stable or well documented.
+
 ## :construction_worker_man: Setup
 
 1. Clone the repository

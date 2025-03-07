@@ -1,13 +1,14 @@
 # :whale2: dock-n-roll
 
-Setup for my ["homelab"](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/) with docker containers.
+Setup for my "[homelab](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)" with docker containers.
 
 ## :construction_worker_man: Setup
 
 1. Clone the repository
 2. Copy `.env.template` to `.env`
 3. Modify `.env` respecitvely
-4. Run `docker-compose  -f ./docker-compose.yml up -d`
+4. Copy `Caddyfile` to the docker volumes
+5. Run `docker-compose up -d`
 
 ## :information_source: Tips & Tricks
 

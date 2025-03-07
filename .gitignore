@@ -1,1 +1,5 @@
+# Production environment
 .env
+
+# Link to the Caddyfile in the docker volume
+Caddyfile_prod

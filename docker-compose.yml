@@ -46,4 +46,4 @@ services:
       TZ: 'Europe/Berlin'
       FTLCONF_dns_listeningMode: 'all'
     dns:
-      - 127.0.0.1
+      - 8.8.8.8

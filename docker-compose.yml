@@ -10,6 +10,7 @@ services:
       # ADMIN_TOKEN: "${ADMIN_TOKEN}"
       ORG_CREATION_USERS: "${EMAIL}"
       SIGNUPS_ALLOWED: "false"
+      EXPERIMENTAL_CLIENT_FEATURE_FLAGS: "ssh-key-vault-item"
     dns:
       - 127.0.0.1
   caddy:

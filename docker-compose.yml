@@ -63,6 +63,8 @@ services:
       - "${DOCKER_VOLUMES}/odoo/data:/var/lib/odoo"
       - "${DOCKER_VOLUMES}/odoo/config:/etc/odoo"
     restart: always
+    dns:
+      - 8.8.8.8
   postgres:
     container_name: postgres
     image: postgres:16

@@ -20,7 +20,9 @@ services:
       - "80:80"  # Needed for the ACME HTTP-01 challenge.
       - "443:443"
       - "443:443/udp"  # Needed for HTTP/3.
-      - "314:314"
+      - "314:314"  # Pihole
+      - "315:315"  # Vaultwarden
+      - "316:316"  # Odoo
     volumes:
       - "${DOCKER_VOLUMES}/caddy/Caddyfile:/etc/caddy/Caddyfile"
       - "${DOCKER_VOLUMES}/caddy/config:/config"
@@ -52,8 +54,6 @@ services:
     image: odoo:18
     depends_on:
       - postgres
-    ports:
-      - "8069:8069"
     environment:
       HOST: postgres
       USER: ${POSTGRES_USER}

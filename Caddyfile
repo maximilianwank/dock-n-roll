@@ -9,18 +9,23 @@
 }
 
 {$DOMAIN} {
-	# handle_path /vault/notifications/hub* {
-	#   reverse_proxy vaultwarden:3012
-	# }
-
-	handle_path /vault* {
-		reverse_proxy vaultwarden:80 {
-			header_up X-Real-IP {remote_host}
-		}
+	@rootPath path "/"
+	header @rootPath Content-Type "text/html"
+	respond @rootPath "<!DOCTYPE html><html><head><title>Homelab Services</title></head><body><h1>Welcome</h1><ul><li><a href='{$DOMAIN}:314'>Pihole</a></li><li><a href='{$DOMAIN}:315'>Vaultwarden</a></li><li><a href='{$DOMAIN}:316'>Odoo</a></li></ul></body></html>" 200 {
 	}
 }
 
 {$DOMAIN}:314 {
 	redir / /admin{uri}
 	reverse_proxy pihole:80
+}
+
+{$DOMAIN}:315 {
+	reverse_proxy vaultwarden:80 {
+		header_up X-Real-IP {remote_host}
+	}
+}
+
+{$DOMAIN}:316 {
+	reverse_proxy odoo:8069
 }

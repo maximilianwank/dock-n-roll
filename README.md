@@ -61,3 +61,7 @@ docker exec -it pihole pihole -a -p
 ```
 
 on the host.
+
+### :books: Odoo
+
+To generate pdfs, it might be necessary to set the system parameter `report.url` to `http://0.0.0.0:8069`, see [here](https://github.com/odoo/docker/issues/238#issuecomment-457216876).

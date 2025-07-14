@@ -6,7 +6,7 @@ services:
     volumes:
       - "${DOCKER_VOLUMES}/vaultwarden:/data"
     environment:
-      DOMAIN: "${DOMAIN}"
+      DOMAIN: "${DOMAIN}:315"
       ORG_CREATION_USERS: "${EMAIL}"
       SIGNUPS_ALLOWED: "false"
       EXPERIMENTAL_CLIENT_FEATURE_FLAGS: "ssh-key-vault-item"

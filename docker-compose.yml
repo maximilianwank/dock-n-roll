@@ -23,6 +23,7 @@ services:
       - "314:314"  # Pihole
       - "315:315"  # Vaultwarden
       - "316:316"  # Odoo
+      - "317:317"  # yt-dlp-webui
     volumes:
       - "${DOCKER_VOLUMES}/caddy/Caddyfile:/etc/caddy/Caddyfile"
       - "${DOCKER_VOLUMES}/caddy/config:/config"
@@ -76,3 +77,14 @@ services:
     volumes:
       - "${DOCKER_VOLUMES}/postgres/db:/var/lib/postgresql/data"
     restart: always
+  yt-dlp-webui:
+    container_name: yt-dlp-webui
+    image: marcobaobao/yt-dlp-webui
+    volumes:
+      # - "${DOCKER_VOLUMES}/yt-dlp-webui/downloads:/downloads"
+      - "${DOCKER_VOLUMES}/yt-dlp-webui/config:/config"
+    healthcheck:
+      test: curl -f http://localhost:3033 || exit 1
+    restart: unless-stopped
+    dns:
+      - 8.8.8.8

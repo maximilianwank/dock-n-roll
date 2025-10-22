@@ -80,9 +80,6 @@ services:
   yt-dlp-webui:
     container_name: yt-dlp-webui
     image: marcobaobao/yt-dlp-webui
-    volumes:
-      # - "${DOCKER_VOLUMES}/yt-dlp-webui/downloads:/downloads"
-      - "${DOCKER_VOLUMES}/yt-dlp-webui/config:/config"
     healthcheck:
       test: curl -f http://localhost:3033 || exit 1
     restart: unless-stopped

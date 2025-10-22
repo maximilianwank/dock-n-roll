@@ -11,7 +11,7 @@
 {$DOMAIN} {
 	@rootPath path "/"
 	header @rootPath Content-Type "text/html"
-	respond @rootPath "<!DOCTYPE html><html><head><title>Homelab Services</title></head><body><h1>Welcome</h1><ul><li><a href='{$DOMAIN}:314'>Pihole</a></li><li><a href='{$DOMAIN}:315'>Vaultwarden</a></li><li><a href='{$DOMAIN}:316'>Odoo</a></li><li><a href='{$DOMAIN}:317'>YT-DLP WebUI</a></li></ul></body></html>" 200 {
+	respond @rootPath "<!DOCTYPE html><html><head><title>Homelab Services</title></head><body><h1>Welcome</h1><ul><li><a href='{$DOMAIN}:314'>Pihole</a></li><li><a href='{$DOMAIN}:315'>Vaultwarden</a></li><li><a href='{$DOMAIN}:316'>Odoo</a></li><li><a href='{$DOMAIN}:317'>yt-dlp Web UI</a></li></ul></body></html>" 200 {
 	}
 }
 

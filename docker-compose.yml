@@ -23,6 +23,7 @@ services:
       - "314:314"  # Pihole
       - "315:315"  # Vaultwarden
       - "316:316"  # Odoo
+      - "317:317"  # MeTube
     volumes:
       - "${DOCKER_VOLUMES}/caddy/Caddyfile:/etc/caddy/Caddyfile"
       - "${DOCKER_VOLUMES}/caddy/config:/config"
@@ -76,3 +77,9 @@ services:
     volumes:
       - "${DOCKER_VOLUMES}/postgres/db:/var/lib/postgresql/data"
     restart: always
+  metube:
+    container_name: metube
+    image: ghcr.io/alexta69/metube
+    restart: unless-stopped
+    dns:
+      - 8.8.8.8

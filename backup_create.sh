@@ -13,7 +13,7 @@ docker-compose -f ./docker-compose.yml down
 
 # Create a zip backup with a password
 echo "Creating backup..."
-zip -r -P "$BACKUP_PASSWORD" "$BACKUP_FILE" "$DOCKER_VOLUMES" -x "$DOCKER_VOLUMES/yt-dlp-webui/downloads/*"
+zip -r -P "$BACKUP_PASSWORD" "$BACKUP_FILE" "$DOCKER_VOLUMES" -x "$DOCKER_VOLUMES/metube/downloads/*"
 
 # Start all containers again
 echo "Starting containers..."

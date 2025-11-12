@@ -81,5 +81,7 @@ services:
     container_name: metube
     image: ghcr.io/alexta69/metube
     restart: unless-stopped
+    volumes:
+      - "${DOCKER_VOLUMES}/metube/downloads:/downloads"
     dns:
       - 8.8.8.8

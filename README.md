@@ -21,8 +21,10 @@ This project is still under development and therefore not very stable or well do
 The backup script creates encrypted, compressed archives of your Docker volumes:
 
 ```bash
-./backup_create.sh
+sudo ./backup_create.sh
 ```
+
+**Note:** The script requires `sudo` to access all Docker volume files (which are owned by root/container users).
 
 **What it does:**
 - Stops all containers
@@ -33,7 +35,7 @@ The backup script creates encrypted, compressed archives of your Docker volumes:
 
 **Automate with cron:**
 
-Add this line to your crontab to run backups daily at 4 AM:
+Add this line to your **root** crontab (`sudo crontab -e`) to run backups daily at 4 AM:
 
 ```text
 0 4 * * * cd /path/to/dock-n-roll && ./backup_create.sh

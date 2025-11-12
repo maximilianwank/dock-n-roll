@@ -1,11 +1,21 @@
 #!/bin/bash
 
+# Check if running as root
+if [ "$EUID" -ne 0 ]; then
+  echo "This script requires root privileges to access all Docker volume files."
+  echo "Please run with sudo: sudo ./backup_create.sh"
+  exit 1
+fi
+
 # Read config data from .env
 source .env
 
 # Define the path for the backup file
 DAY_OF_WEEK=$(date +%A | tr '[:upper:]' '[:lower:]')
 BACKUP_FILE=$BACKUP_DIR/$DAY_OF_WEEK.tar.gz
+
+# Create backup directory if it doesn't exist
+mkdir -p "$BACKUP_DIR"
 
 # Stop all running containers that have been defined in the docker-compose.yml file
 echo "Stopping containers..."

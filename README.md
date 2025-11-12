@@ -14,35 +14,63 @@ This project is still under development and therefore not very stable or well do
 
 ## :information_source: Tips & Tricks
 
-### :robot: Automate Creation of Backup
+### :floppy_disk: Backup & Restore
 
-You can make cron run the backup script, for example by adding the line
+#### Creating Backups
+
+The backup script creates encrypted, compressed archives of your Docker volumes:
+
+```bash
+./backup_create.sh
+```
+
+**What it does:**
+- Stops all containers
+- Creates a `tar.gz` archive of your Docker volumes (excludes metube downloads)
+- Restarts containers to minimize downtime
+- Encrypts the archive with GPG using `BACKUP_PASSWORD` from `.env`
+- Saves as `{weekday}.tar.gz.gpg` in your `BACKUP_DIR`
+
+**Automate with cron:**
+
+Add this line to your crontab to run backups daily at 4 AM:
 
 ```text
 0 4 * * * cd /path/to/dock-n-roll && ./backup_create.sh
 ```
 
-to your crontab.
+#### Restoring Backups
 
-### :previous_track_button: Backup Restore
-
-If necessary, stop the containers
+The restore script decrypts and extracts backup archives:
 
 ```bash
-docker compose down
+./backup_restore.sh /path/to/monday.tar.gz.gpg
 ```
 
-Unzip the archive via
+**What it does:**
+- Prompts for the restore destination path
+- Asks for confirmation before overwriting existing data
+- Decrypts the GPG-encrypted backup (prompts for password)
+- Extracts the archive to the specified location
 
-```bash
-unzip -P your_password_here docker_volumes_backup_{weekday}.zip -d zip_restore
-```
+**Manual restore steps:**
 
-Copy the docker_volumes folder
+1. Stop containers (if needed):
+   ```bash
+   docker compose down
+   ```
 
-```bash
-cp -r zip_restore/home/maxi/docker_volumes docker_volumes
-```
+2. Run the restore script:
+   ```bash
+   ./backup_restore.sh monday.tar.gz.gpg
+   ```
+
+3. Follow the prompts to enter destination path and password
+
+4. Start containers again:
+   ```bash
+   docker compose up -d
+   ```
 
 ### :truck: Caddy
 

@@ -26,6 +26,7 @@ echo "Creating backup..."
 tar -czf "$BACKUP_FILE" \
   -C "$(dirname "$DOCKER_VOLUMES")" \
   --exclude="metube/downloads" \
+  --exclude="pihole/pihole/pihole-FTL.db" \
   "$(basename "$DOCKER_VOLUMES")"
 
 echo "Backup created: $BACKUP_FILE"

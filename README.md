@@ -2,47 +2,89 @@
 
 Setup for my "[homelab](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)" with docker containers.
 
-This project is still under development and therefore not very stable or well documented.
+> **⚠️ Note:** This repository contains the setup of my personal homelab. It is tailored to my specific needs and environment. Feel free to use it as inspiration, but you might need to adapt it to your own setup.
+
+## :package: Services
+
+This setup includes the following services:
+
+- **Vaultwarden** (port 315) - Self-hosted password manager
+- **Pi-hole** (port 314) - Network-wide ad blocking
+- **Odoo** (port 316) - Business management software
+- **MeTube** (port 317) - YouTube downloader web UI
+- **Caddy** - Reverse proxy with automatic HTTPS
+- **PostgreSQL** - Database for Odoo
 
 ## :construction_worker_man: Setup
 
 1. Clone the repository
 2. Copy `.env.template` to `.env`
-3. Modify `.env` respecitvely
-4. Copy `Caddyfile` to the docker volumes
-5. Run `docker-compose up -d`
+3. Modify `.env` with your settings (domain, email, passwords)
+4. Create the Docker volumes directory: `mkdir -p ~/docker_volumes`
+5. Copy `Caddyfile` to the docker volumes: `cp Caddyfile ~/docker_volumes/caddy/`
+6. Run `docker compose up -d`
 
 ## :information_source: Tips & Tricks
 
-### :robot: Automate Creation of Backup
+### :floppy_disk: Backup & Restore
 
-You can make cron run the backup script, for example by adding the line
+#### Creating Backups
+
+The backup script creates encrypted, compressed archives of your Docker volumes:
+
+```bash
+sudo ./backup_create.sh
+```
+
+**Note:** The script requires `sudo` to access all Docker volume files (which are owned by root/container users).
+
+**What it does:**
+- Stops all containers
+- Creates a `tar.gz` archive of your Docker volumes (excludes MeTube downloads)
+- Restarts containers to minimize downtime
+- Encrypts the archive with GPG using `BACKUP_PASSWORD` from `.env`
+- Saves as `{weekday}.tar.gz.gpg` in your `BACKUP_DIR`
+
+**Automate with cron:**
+
+Add this line to your **root** crontab (`sudo crontab -e`) to run backups daily at 4 AM:
 
 ```text
 0 4 * * * cd /path/to/dock-n-roll && ./backup_create.sh
 ```
 
-to your crontab.
+#### Restoring Backups
 
-### :previous_track_button: Backup Restore
-
-If necessary, stop the containers
+The restore script decrypts and extracts backup archives:
 
 ```bash
-docker compose down
+./backup_restore.sh /path/to/monday.tar.gz.gpg
 ```
 
-Unzip the archive via
+**What it does:**
+- Prompts for the restore destination path (defaults to `./docker_volumes` in the script directory)
+- Asks for confirmation before overwriting existing data
+- Decrypts the GPG-encrypted backup (prompts for password)
+- Extracts the archive to the specified location
 
-```bash
-unzip -P your_password_here docker_volumes_backup_{weekday}.zip -d zip_restore
-```
+**Manual restore steps:**
 
-Copy the docker_volumes folder
+1. Stop containers (if needed):
+   ```bash
+   docker compose down
+   ```
 
-```bash
-cp -r zip_restore/home/maxi/docker_volumes docker_volumes
-```
+2. Run the restore script:
+   ```bash
+   ./backup_restore.sh monday.tar.gz.gpg
+   ```
+
+3. Follow the prompts to enter destination path and password
+
+4. Start containers again:
+   ```bash
+   docker compose up -d
+   ```
 
 ### :truck: Caddy
 
@@ -64,4 +106,10 @@ on the host.
 
 ### :books: Odoo
 
-To generate pdfs, it might be necessary to set the system parameter `report.url` to `http://0.0.0.0:8069`, see [here](https://github.com/odoo/docker/issues/238#issuecomment-457216876).
+To generate PDFs, it might be necessary to set the system parameter `report.url` to `http://0.0.0.0:8069`, see [here](https://github.com/odoo/docker/issues/238#issuecomment-457216876).
+
+### :arrow_down: MeTube
+
+MeTube is a web-based YouTube downloader.
+
+**Note:** Downloads are stored in `${DOCKER_VOLUMES}/metube/downloads` and are **excluded** from backups to save space.

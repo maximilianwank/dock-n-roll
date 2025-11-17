@@ -24,6 +24,7 @@ services:
       - "315:315"  # Vaultwarden
       - "316:316"  # Odoo
       - "317:317"  # MeTube
+      - "318:318"  # Radicale
     volumes:
       - "${DOCKER_VOLUMES}/caddy/Caddyfile:/etc/caddy/Caddyfile"
       - "${DOCKER_VOLUMES}/caddy/config:/config"
@@ -83,5 +84,15 @@ services:
     restart: unless-stopped
     volumes:
       - "${DOCKER_VOLUMES}/metube/downloads:/downloads"
+    dns:
+      - 8.8.8.8
+  radicale:
+    container_name: radicale
+    image: tomsquest/docker-radicale
+    restart: unless-stopped
+    environment:
+      TAKE_FILE_OWNERSHIP: "false"
+    volumes:
+      - "${DOCKER_VOLUMES}/radicale/data:/data"
     dns:
       - 8.8.8.8

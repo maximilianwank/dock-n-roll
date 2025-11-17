@@ -110,6 +110,6 @@ To generate PDFs, it might be necessary to set the system parameter `report.url`
 
 ### :arrow_down: MeTube
 
-MeTube is a web-based YouTube downloader. Access it at `{$DOMAIN}:317`.
+MeTube is a web-based YouTube downloader.
 
 **Note:** Downloads are stored in `${DOCKER_VOLUMES}/metube/downloads` and are **excluded** from backups to save space.

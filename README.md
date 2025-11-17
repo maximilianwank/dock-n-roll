@@ -1,8 +1,8 @@
 # :whale2: dock-n-roll
 
-> **⚠️ Note:** This repository contains the setup of my personal homelab. It is tailored to my specific needs and environment. Feel free to use it as inspiration, but you might need to adapt it to your own setup.
-
 Setup for my "[homelab](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)" with docker containers.
+
+> **⚠️ Note:** This repository contains the setup of my personal homelab. It is tailored to my specific needs and environment. Feel free to use it as inspiration, but you might need to adapt it to your own setup.
 
 ## :package: Services
 

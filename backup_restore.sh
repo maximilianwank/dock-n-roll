@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DEFAULT_RESTORE_PATH="$SCRIPT_DIR/docker_volumes"
+
 # Function to display usage
 usage() {
   echo "Usage: $0 <backup_file>"
@@ -26,11 +30,12 @@ if [ ! -f "$BACKUP_FILE" ]; then
 fi
 
 # Get the restore destination
-read -p "Enter the full path where volumes should be restored (e.g., /home/user/docker_volumes): " RESTORE_PATH
+read -p "Enter the full path where volumes should be restored [default: $DEFAULT_RESTORE_PATH]: " RESTORE_PATH
 
+# Use default if empty
 if [ -z "$RESTORE_PATH" ]; then
-  echo "Error: Restore path cannot be empty!"
-  exit 1
+  RESTORE_PATH="$DEFAULT_RESTORE_PATH"
+  echo "Using default restore path: $RESTORE_PATH"
 fi
 
 # Confirm before proceeding

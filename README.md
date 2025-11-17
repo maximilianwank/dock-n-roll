@@ -2,15 +2,25 @@
 
 Setup for my "[homelab](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)" with docker containers.
 
-This project is still under development and therefore not very stable or well documented.
+## :package: Services
+
+This setup includes the following services:
+
+- **Vaultwarden** (port 315) - Self-hosted password manager
+- **Pi-hole** (port 314) - Network-wide ad blocking
+- **Odoo** (port 316) - Business management software
+- **MeTube** (port 317) - YouTube downloader web UI
+- **Caddy** - Reverse proxy with automatic HTTPS
+- **PostgreSQL** - Database for Odoo
 
 ## :construction_worker_man: Setup
 
 1. Clone the repository
 2. Copy `.env.template` to `.env`
-3. Modify `.env` respecitvely
-4. Copy `Caddyfile` to the docker volumes
-5. Run `docker-compose up -d`
+3. Modify `.env` with your settings (domain, email, passwords)
+4. Create the Docker volumes directory: `mkdir -p ~/docker_volumes`
+5. Copy `Caddyfile` to the docker volumes: `cp Caddyfile ~/docker_volumes/caddy/`
+6. Run `docker compose up -d`
 
 ## :information_source: Tips & Tricks
 
@@ -28,7 +38,7 @@ sudo ./backup_create.sh
 
 **What it does:**
 - Stops all containers
-- Creates a `tar.gz` archive of your Docker volumes (excludes metube downloads)
+- Creates a `tar.gz` archive of your Docker volumes (excludes MeTube downloads)
 - Restarts containers to minimize downtime
 - Encrypts the archive with GPG using `BACKUP_PASSWORD` from `.env`
 - Saves as `{weekday}.tar.gz.gpg` in your `BACKUP_DIR`
@@ -50,7 +60,7 @@ The restore script decrypts and extracts backup archives:
 ```
 
 **What it does:**
-- Prompts for the restore destination path
+- Prompts for the restore destination path (defaults to `./docker_volumes` in the script directory)
 - Asks for confirmation before overwriting existing data
 - Decrypts the GPG-encrypted backup (prompts for password)
 - Extracts the archive to the specified location
@@ -94,4 +104,10 @@ on the host.
 
 ### :books: Odoo
 
-To generate pdfs, it might be necessary to set the system parameter `report.url` to `http://0.0.0.0:8069`, see [here](https://github.com/odoo/docker/issues/238#issuecomment-457216876).
+To generate PDFs, it might be necessary to set the system parameter `report.url` to `http://0.0.0.0:8069`, see [here](https://github.com/odoo/docker/issues/238#issuecomment-457216876).
+
+### :arrow_down: MeTube
+
+MeTube is a web-based YouTube downloader. Access it at `{$DOMAIN}:317`.
+
+**Note:** Downloads are stored in `${DOCKER_VOLUMES}/metube/downloads` and are **excluded** from backups to save space.

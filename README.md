@@ -123,11 +123,11 @@ Radicale is a CalDAV and CardDAV server for calendar and contact synchronization
 
 1. Generate a password hash:
    ```bash
-   docker run --rm caddy:2 caddy hash-password
+   docker run --rm caddy:2 caddy hash-password --plaintext your_password
    ```
 
 2. Add the username and hash to your `.env` file:
-   ```bash
+   ```
    RADICALE_USER=your_username
    RADICALE_PASSWORD_HASH=JDJhJDE0J... (paste the output from step 1)
    ```

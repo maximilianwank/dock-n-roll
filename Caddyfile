@@ -35,5 +35,8 @@
 }
 
 {$DOMAIN}:318 {
+	basicauth {
+		{$RADICALE_USER} {$RADICALE_PASSWORD_HASH}
+	}
 	reverse_proxy radicale:5232
 }

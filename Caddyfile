@@ -35,8 +35,10 @@
 }
 
 {$DOMAIN}:318 {
-	basicauth {
+	basic_auth {
 		{$RADICALE_USER} {$RADICALE_PASSWORD_HASH}
 	}
-	reverse_proxy radicale:5232
+	reverse_proxy radicale:5232 {
+        header_up X-remote-user {http.auth.user.id}
+	}
 }

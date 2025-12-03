@@ -8,10 +8,11 @@ Setup for my "[homelab](https://www.raspberrypi.com/products/raspberry-pi-4-mode
 
 This setup includes the following services:
 
-- **Vaultwarden** (port 315) - Self-hosted password manager
 - **Pi-hole** (port 314) - Network-wide ad blocking
+- **Vaultwarden** (port 315) - Self-hosted password manager
 - **Odoo** (port 316) - Business management software
 - **MeTube** (port 317) - YouTube downloader web UI
+- **Radicale** (port 318) - CalDAV/CardDAV server for calendars and contacts
 - **Caddy** - Reverse proxy with automatic HTTPS
 - **PostgreSQL** - Database for Odoo
 
@@ -113,3 +114,25 @@ To generate PDFs, it might be necessary to set the system parameter `report.url`
 MeTube is a web-based YouTube downloader.
 
 **Note:** Downloads are stored in `${DOCKER_VOLUMES}/metube/downloads` and are **excluded** from backups to save space.
+
+### :calendar: Radicale
+
+Radicale is a CalDAV and CardDAV server for calendar and contact synchronization.
+
+**Authentication:** Radicale is protected by HTTP Basic Authentication via Caddy. To set up authentication:
+
+1. Generate a password hash:
+   ```bash
+   docker run --rm caddy:2 caddy hash-password --plaintext your_password
+   ```
+
+2. Add the username and hash to your `.env` file:
+   ```
+   RADICALE_USER=your_username
+   RADICALE_PASSWORD_HASH=JDJhJDE0J... (paste the output from step 1)
+   ```
+
+3. Restart Caddy to apply the changes:
+   ```bash
+   docker compose restart caddy
+   ```

@@ -22,13 +22,14 @@ echo "Stopping containers..."
 docker-compose -f ./docker-compose.yml down
 
 
-# Create and encrypt the backup
+
+# Create and encrypt the backup (correct passphrase handling)
 echo "Creating and encrypting backup with GPG (single step)..."
 tar -cz -C "$(dirname "$DOCKER_VOLUMES")" \
   --exclude="metube/downloads" \
   --exclude="pihole/pihole/pihole-FTL.db" \
   "$(basename "$DOCKER_VOLUMES")" \
-| echo "$BACKUP_PASSWORD" | gpg --batch --yes --passphrase-fd 0 -c > "$BACKUP_FILE"
+| gpg --batch --yes --passphrase-fd 0 -c > "$BACKUP_FILE" 0< <(echo "$BACKUP_PASSWORD")
 
 echo "Encrypted backup: $BACKUP_FILE"
 

@@ -18,19 +18,16 @@ BACKUP_FILE="$BACKUP_DIR/$DAY_OF_WEEK.tar.gz.gpg"
 mkdir -p "$BACKUP_DIR"
 
 # Stop all running containers that have been defined in the docker-compose.yml file
-echo "Stopping containers..."
+echo "Stopping containers"
 docker-compose -f ./docker-compose.yml down
 
-
-
-# Create and encrypt the backup (correct passphrase handling)
-echo "Creating and encrypting backup with GPG (single step)..."
-tar -cz -C "$(dirname "$DOCKER_VOLUMES")" \
+# Create and encrypt the backup
+echo "Creating and encrypting backup with GPG"
+tar -cz -C "$(dirname \"$DOCKER_VOLUMES\")" \
   --exclude="metube/downloads" \
   --exclude="pihole/pihole/pihole-FTL.db" \
-  "$(basename "$DOCKER_VOLUMES")" \
-| gpg --batch --yes --passphrase-fd 0 -c > "$BACKUP_FILE" 0< <(echo "$BACKUP_PASSWORD")
-
+  "$(basename \"$DOCKER_VOLUMES\")" \
+| gpg --batch --yes --passphrase "$BACKUP_PASSWORD" -c > "$BACKUP_FILE"
 echo "Encrypted backup: $BACKUP_FILE"
 
 # Set owner and group of the backup file to BACKUP_USER
@@ -39,5 +36,5 @@ echo "Set owner and group of $BACKUP_FILE to $BACKUP_USER"
 echo "Final size: $(du -h "$BACKUP_FILE" | cut -f1)"
 
 # Start all containers
-echo "Starting containers..."
+echo "Starting containers"
 docker-compose -f ./docker-compose.yml up -d

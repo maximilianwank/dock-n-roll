@@ -22,7 +22,7 @@ echo "Stopping containers..."
 docker-compose -f ./docker-compose.yml down
 
 
-# Create and encrypt the backup in one step to minimize SD card writes
+# Create and encrypt the backup
 echo "Creating and encrypting backup with GPG (single step)..."
 tar -cz -C "$(dirname "$DOCKER_VOLUMES")" \
   --exclude="metube/downloads" \

@@ -23,10 +23,10 @@ docker-compose -f ./docker-compose.yml down
 
 # Create and encrypt the backup
 echo "Creating and encrypting backup with GPG"
-tar -cz -C "$(dirname \"$DOCKER_VOLUMES\")" \
+tar -cz -C "$(dirname "$DOCKER_VOLUMES")" \
   --exclude="metube/downloads" \
   --exclude="pihole/pihole/pihole-FTL.db" \
-  "$(basename \"$DOCKER_VOLUMES\")" \
+  "$(basename "$DOCKER_VOLUMES")" \
 | gpg --batch --yes --passphrase "$BACKUP_PASSWORD" -c > "$BACKUP_FILE"
 echo "Encrypted backup: $BACKUP_FILE"
 

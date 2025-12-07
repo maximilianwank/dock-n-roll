@@ -12,34 +12,29 @@ source .env
 
 # Define the path for the backup file
 DAY_OF_WEEK=$(date +%A | tr '[:upper:]' '[:lower:]')
-BACKUP_FILE=$BACKUP_DIR/$DAY_OF_WEEK.tar.gz
+BACKUP_FILE="$BACKUP_DIR/$DAY_OF_WEEK.tar.gz.gpg"
 
 # Create backup directory if it doesn't exist
 mkdir -p "$BACKUP_DIR"
 
 # Stop all running containers that have been defined in the docker-compose.yml file
-echo "Stopping containers..."
+echo "Stopping containers"
 docker-compose -f ./docker-compose.yml down
 
-# Create a tar.gz backup
-echo "Creating backup..."
-tar -czf "$BACKUP_FILE" \
-  -C "$(dirname "$DOCKER_VOLUMES")" \
+# Create and encrypt the backup
+echo "Creating and encrypting backup with GPG"
+tar -cz -C "$(dirname "$DOCKER_VOLUMES")" \
   --exclude="metube/downloads" \
   --exclude="pihole/pihole/pihole-FTL.db" \
-  "$(basename "$DOCKER_VOLUMES")"
-
-echo "Backup created: $BACKUP_FILE"
-echo "Backup size: $(du -h "$BACKUP_FILE" | cut -f1)"
-
-# Start all containers again to minimize downtime
-echo "Starting containers..."
-docker-compose -f ./docker-compose.yml up -d
-
-# Encrypt with gpg
-echo "Encrypting backup with GPG..."
-echo "$BACKUP_PASSWORD" | gpg --batch --yes --passphrase-fd 0 -c "$BACKUP_FILE"
-rm "$BACKUP_FILE"
-BACKUP_FILE="${BACKUP_FILE}.gpg"
+  "$(basename "$DOCKER_VOLUMES")" \
+| gpg --batch --yes --passphrase "$BACKUP_PASSWORD" -c > "$BACKUP_FILE"
 echo "Encrypted backup: $BACKUP_FILE"
+
+# Set owner and group of the backup file to BACKUP_USER
+chown "$BACKUP_USER:$BACKUP_USER" "$BACKUP_FILE"
+echo "Set owner and group of $BACKUP_FILE to $BACKUP_USER"
 echo "Final size: $(du -h "$BACKUP_FILE" | cut -f1)"
+
+# Start all containers
+echo "Starting containers"
+docker-compose -f ./docker-compose.yml up -d

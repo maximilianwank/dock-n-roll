@@ -136,3 +136,7 @@ Radicale is a CalDAV and CardDAV server for calendar and contact synchronization
    ```bash
    docker compose restart caddy
    ```
+
+### :chart_with_upwards_trend: Beszel
+
+- **Docker container charts are empty or missing:** See [this guide](https://beszel.dev/guide/common-issues#docker-container-charts-are-empty-or-missing) for common issues and solutions.

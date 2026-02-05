@@ -108,3 +108,16 @@ services:
       - "${DOCKER_VOLUMES}/beszel/agent_data/agent.sock:/var/run/beszel/beszel-agent.sock:ro"
     dns:
       - 8.8.8.8
+  beszel-agent:
+    image: henrygd/beszel-agent
+    container_name: beszel-agent
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - "${DOCKER_VOLUMES}/beszel/agent_data:/var/lib/beszel-agent"
+    environment:
+      LISTEN: 45876
+      KEY: "${BESZEL_KEY}"
+      TOKEN: "${BESZEL_TOKEN}"
+      HUB_URL: "${BESZEL_HUB_URL}"

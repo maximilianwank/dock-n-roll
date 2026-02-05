@@ -11,7 +11,7 @@
 {$DOMAIN} {
 	@rootPath path "/"
 	header @rootPath Content-Type "text/html"
-	respond @rootPath "<!DOCTYPE html><html><head><title>Homelab Services</title></head><body><h1>Welcome</h1><ul><li><a href='{$DOMAIN}:314'>Pihole</a></li><li><a href='{$DOMAIN}:315'>Vaultwarden</a></li><li><a href='{$DOMAIN}:316'>Odoo</a></li><li><a href='{$DOMAIN}:317'>MeTube</a></li><li><a href='{$DOMAIN}:318'>Radicale</a></li></ul></body></html>" 200 {
+	respond @rootPath "<!DOCTYPE html><html><head><title>Homelab Services</title></head><body><h1>Welcome</h1><ul><li><a href='{$DOMAIN}:314'>Pihole</a></li><li><a href='{$DOMAIN}:315'>Vaultwarden</a></li><li><a href='{$DOMAIN}:316'>Odoo</a></li><li><a href='{$DOMAIN}:317'>MeTube</a></li><li><a href='{$DOMAIN}:318'>Radicale</a></li><li><a href='{$DOMAIN}:319'>Beszel</a></li></ul></body></html>" 200 {
 	}
 }
 
@@ -41,4 +41,8 @@
 	reverse_proxy radicale:5232 {
         header_up X-remote-user {http.auth.user.id}
 	}
+}
+
+{$DOMAIN}:319 {
+	reverse_proxy beszel:8090
 }

@@ -25,6 +25,7 @@ services:
       - "316:316"  # Odoo
       - "317:317"  # MeTube
       - "318:318"  # Radicale
+      - "319:319"  # Beszel
     volumes:
       - "${DOCKER_VOLUMES}/caddy/Caddyfile:/etc/caddy/Caddyfile"
       - "${DOCKER_VOLUMES}/caddy/config:/config"
@@ -82,7 +83,7 @@ services:
     restart: always
   metube:
     container_name: metube
-    image: ghcr.io/alexta69/metube
+    image: ghcr.io/alexta69/metube:latest
     restart: unless-stopped
     volumes:
       - "${DOCKER_VOLUMES}/metube/downloads:/downloads"
@@ -96,5 +97,14 @@ services:
       TAKE_FILE_OWNERSHIP: "false"
     volumes:
       - "${DOCKER_VOLUMES}/radicale/data:/data"
+    dns:
+      - 8.8.8.8
+  beszel:
+    container_name: beszel
+    image: henrygd/beszel
+    restart: unless-stopped
+    volumes:
+      - "${DOCKER_VOLUMES}/beszel/data:/beszel_data"
+      - "${DOCKER_VOLUMES}/beszel/agent_data/agent.sock:/var/run/beszel/beszel-agent.sock:ro"
     dns:
       - 8.8.8.8

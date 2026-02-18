@@ -13,6 +13,7 @@ This setup includes the following services:
 - **Odoo** (port 316) - Business management software
 - **MeTube** (port 317) - YouTube downloader web UI
 - **Radicale** (port 318) - CalDAV/CardDAV server for calendars and contacts
+- **Beszel** (port 319) - Server and other clients monitoring
 - **Caddy** - Reverse proxy with automatic HTTPS
 - **PostgreSQL** - Database for Odoo
 
@@ -136,3 +137,7 @@ Radicale is a CalDAV and CardDAV server for calendar and contact synchronization
    ```bash
    docker compose restart caddy
    ```
+
+### :chart_with_upwards_trend: Beszel
+
+If the Docker container charts are empty or missing, see [this guide](https://beszel.dev/guide/common-issues#docker-container-charts-are-empty-or-missing) for common issues and solutions.

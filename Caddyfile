@@ -48,5 +48,5 @@
 }
 
 {$DOMAIN}:320 {
-	reverse_proxy speedtest:80
+	reverse_proxy speedtest:8080
 }

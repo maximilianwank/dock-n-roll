@@ -14,6 +14,7 @@ This setup includes the following services:
 - **MeTube** (port 317) - YouTube downloader web UI
 - **Radicale** (port 318) - CalDAV/CardDAV server for calendars and contacts
 - **Beszel** (port 319) - Server and other clients monitoring
+- **Speedtest** (port 320) - Self-hosted internet speed test
 - **Caddy** - Reverse proxy with automatic HTTPS
 - **PostgreSQL** - Database for Odoo
 

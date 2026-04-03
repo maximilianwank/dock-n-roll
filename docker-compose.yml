@@ -26,6 +26,7 @@ services:
       - "317:317"  # MeTube
       - "318:318"  # Radicale
       - "319:319"  # Beszel
+      - "320:320"  # Speedtest
     volumes:
       - "${DOCKER_VOLUMES}/caddy/Caddyfile:/etc/caddy/Caddyfile"
       - "${DOCKER_VOLUMES}/caddy/config:/config"
@@ -121,3 +122,9 @@ services:
       KEY: "${BESZEL_KEY}"
       TOKEN: "${BESZEL_TOKEN}"
       HUB_URL: "${BESZEL_HUB_URL}"
+  speedtest:
+    container_name: speedtest
+    image: ghcr.io/librespeed/speedtest:latest
+    restart: always
+    environment:
+      MODE: standalone

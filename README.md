@@ -29,6 +29,21 @@ This setup includes the following services:
 
 ## :information_source: Tips & Tricks
 
+### :arrows_counterclockwise: Updating Containers
+
+To update all containers to their latest images:
+
+```bash
+docker compose pull
+docker compose up -d
+```
+
+To clean up old/unused images afterwards:
+
+```bash
+docker image prune -f
+```
+
 ### :floppy_disk: Backup & Restore
 
 #### Creating Backups

@@ -51,7 +51,7 @@ docker image prune -f
 The backup script creates encrypted, compressed archives of your Docker volumes:
 
 ```bash
-sudo ./backup_create.sh
+sudo ./scripts/create_backup.sh
 ```
 
 **Note:** The script requires `sudo` to access all Docker volume files (which are owned by root/container users).
@@ -68,7 +68,7 @@ sudo ./backup_create.sh
 Add this line to your **root** crontab (`sudo crontab -e`) to run backups daily at 4 AM:
 
 ```text
-0 4 * * * cd /path/to/dock-n-roll && ./backup_create.sh
+0 4 * * * cd /path/to/dock-n-roll && ./scripts/create_backup.sh
 ```
 
 #### Restoring Backups
@@ -76,11 +76,11 @@ Add this line to your **root** crontab (`sudo crontab -e`) to run backups daily 
 The restore script decrypts and extracts backup archives:
 
 ```bash
-./backup_restore.sh /path/to/monday.tar.gz.gpg
+./scripts/restore_backup.sh /path/to/monday.tar.gz.gpg
 ```
 
 **What it does:**
-- Prompts for the restore destination path (defaults to `./docker_volumes` in the script directory)
+- Prompts for the restore destination path (defaults to `./docker_volumes` in the repository root)
 - Asks for confirmation before overwriting existing data
 - Decrypts the GPG-encrypted backup (prompts for password)
 - Extracts the archive to the specified location
@@ -94,7 +94,7 @@ The restore script decrypts and extracts backup archives:
 
 2. Run the restore script:
    ```bash
-   ./backup_restore.sh monday.tar.gz.gpg
+   ./scripts/restore_backup.sh monday.tar.gz.gpg
    ```
 
 3. Follow the prompts to enter destination path and password

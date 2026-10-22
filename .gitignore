@@ -1,5 +1,6 @@
-# Production environment
-.env
+# Production environment (keep the template)
+.env*
+!.env.template
 
 # Link to the Caddyfile in the docker volume
 Caddyfile_prod

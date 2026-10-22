@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# Get the directory where this script is located
+# Get the repository root (parent of this script's directory)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DEFAULT_RESTORE_PATH="$SCRIPT_DIR/docker_volumes"
+REPO_DIR="$(dirname "$SCRIPT_DIR")"
+DEFAULT_RESTORE_PATH="$REPO_DIR/docker_volumes"
 
 # Function to display usage
 usage() {

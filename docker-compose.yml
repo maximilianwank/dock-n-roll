@@ -1,7 +1,7 @@
 services:
   vaultwarden:
     container_name: vaultwarden
-    image: vaultwarden/server:latest
+    image: vaultwarden/server:1.37.4
     restart: always
     volumes:
       - "${DOCKER_VOLUMES}/vaultwarden:/data"
@@ -41,7 +41,7 @@ services:
       - 8.8.8.8
   pihole:
     container_name: pihole
-    image: pihole/pihole:latest
+    image: pihole/pihole:2026.07.2
     restart: always
     ports:
       - "53:53/tcp"
@@ -84,7 +84,7 @@ services:
     restart: always
   metube:
     container_name: metube
-    image: ghcr.io/alexta69/metube:latest
+    image: ghcr.io/alexta69/metube:2026.10.25
     restart: unless-stopped
     volumes:
       - "${DOCKER_VOLUMES}/metube/downloads:/downloads"
@@ -92,7 +92,7 @@ services:
       - 8.8.8.8
   radicale:
     container_name: radicale
-    image: tomsquest/docker-radicale
+    image: tomsquest/docker-radicale:3.9.0.0
     restart: unless-stopped
     environment:
       TAKE_FILE_OWNERSHIP: "false"
@@ -102,7 +102,7 @@ services:
       - 8.8.8.8
   beszel:
     container_name: beszel
-    image: henrygd/beszel
+    image: henrygd/beszel:0
     restart: unless-stopped
     volumes:
       - "${DOCKER_VOLUMES}/beszel/data:/beszel_data"
@@ -110,7 +110,7 @@ services:
     dns:
       - 8.8.8.8
   beszel-agent:
-    image: henrygd/beszel-agent
+    image: henrygd/beszel-agent:0
     container_name: beszel-agent
     restart: unless-stopped
     network_mode: host
@@ -124,7 +124,7 @@ services:
       HUB_URL: "${BESZEL_HUB_URL}"
   speedtest:
     container_name: speedtest
-    image: ghcr.io/librespeed/speedtest:latest
+    image: ghcr.io/librespeed/speedtest:6
     restart: always
     environment:
       MODE: standalone

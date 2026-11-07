@@ -11,6 +11,8 @@ jobs:
       contents: write
       pull-requests: write
       issues: write
+      # Required so Renovate can read Dependabot alerts for vulnerability fixes.
+      security-events: read
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v7.0.1

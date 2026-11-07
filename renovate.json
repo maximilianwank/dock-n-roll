@@ -5,8 +5,8 @@
     ":pinAllExceptPeerDependencies"
   ],
   "docker-compose": {
-    "fileMatch": [
-      "^docker-compose\\.yml$"
+    "managerFilePatterns": [
+      "/^docker-compose\\.yml$/"
     ]
   },
   "packageRules": [

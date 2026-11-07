@@ -11,6 +11,7 @@ jobs:
       contents: write
       pull-requests: write
       issues: write
+      security-events: read
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v7.0.1

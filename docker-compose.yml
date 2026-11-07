@@ -84,7 +84,7 @@ services:
     restart: always
   metube:
     container_name: metube
-    image: ghcr.io/alexta69/metube:2026.10.25@sha256:78560456793445f4449d8b9d92374350c652725aa76dc75f8682d43fc5ff9a5b
+    image: ghcr.io/alexta69/metube:2026.11.06@sha256:96dfbf0d5b2944e4ee38f6ce1b34bb0e75a1a3c74eaefd93424ed11284cb72b2
     restart: unless-stopped
     volumes:
       - "${DOCKER_VOLUMES}/metube/downloads:/downloads"

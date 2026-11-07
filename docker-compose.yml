@@ -1,7 +1,7 @@
 services:
   vaultwarden:
     container_name: vaultwarden
-    image: vaultwarden/server:1.37.4
+    image: vaultwarden/server:1.37.4@sha256:efb3cde962015fcc036b2ea625242248611943b27212ebf4392841fb30fad055
     restart: always
     volumes:
       - "${DOCKER_VOLUMES}/vaultwarden:/data"
@@ -14,7 +14,7 @@ services:
       - 127.0.0.1
   caddy:
     container_name: caddy
-    image: caddy:2
+    image: caddy:2@sha256:ce773ec7a742ce15ee6bf2bb5f65882b9e2a4487b10733e6f1484f86e6b5d8bc
     restart: always
     ports:
       - "80:80"  # Needed for the ACME HTTP-01 challenge.
@@ -41,7 +41,7 @@ services:
       - 8.8.8.8
   pihole:
     container_name: pihole
-    image: pihole/pihole:2026.07.2
+    image: pihole/pihole:2026.07.2@sha256:f7d1be836e3bc608b56d82fc9904f5a831cdfbc0dc9c6d58f94e4c985c70038b
     restart: always
     ports:
       - "53:53/tcp"
@@ -57,7 +57,7 @@ services:
       - 8.8.8.8
   odoo:
     container_name: odoo
-    image: odoo:18
+    image: odoo:18@sha256:f61d3e36eb699e63557bbcdf4d7bd659e51418c326009e6574565d87e1d9026d
     depends_on:
       - postgres
     environment:
@@ -73,7 +73,7 @@ services:
       - 8.8.8.8
   postgres:
     container_name: postgres
-    image: postgres:16
+    image: postgres:16@sha256:f9a7b9ebf6f56201f949db745e47bc423c0f0f8294bafe991cc10bf74b029657
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -84,7 +84,7 @@ services:
     restart: always
   metube:
     container_name: metube
-    image: ghcr.io/alexta69/metube:2026.10.25
+    image: ghcr.io/alexta69/metube:2026.10.25@sha256:78560456793445f4449d8b9d92374350c652725aa76dc75f8682d43fc5ff9a5b
     restart: unless-stopped
     volumes:
       - "${DOCKER_VOLUMES}/metube/downloads:/downloads"
@@ -92,7 +92,7 @@ services:
       - 8.8.8.8
   radicale:
     container_name: radicale
-    image: tomsquest/docker-radicale:3.9.0.0
+    image: tomsquest/docker-radicale:3.9.0.0@sha256:2f215d0e6a78ff68c280975af6ce580b05976f70c62b51640397e3eb5a7aa0e9
     restart: unless-stopped
     environment:
       TAKE_FILE_OWNERSHIP: "false"
@@ -102,7 +102,7 @@ services:
       - 8.8.8.8
   beszel:
     container_name: beszel
-    image: henrygd/beszel:0
+    image: henrygd/beszel:0@sha256:8514a69d9bbbcb74f371a3205561ee231fc0289739cea64e8131f341d695b770
     restart: unless-stopped
     volumes:
       - "${DOCKER_VOLUMES}/beszel/data:/beszel_data"
@@ -110,7 +110,7 @@ services:
     dns:
       - 8.8.8.8
   beszel-agent:
-    image: henrygd/beszel-agent:0
+    image: henrygd/beszel-agent:0@sha256:cb6868012964d7a68debaa2c84bb72285e5f08531e81f506bd4c493bf052e41c
     container_name: beszel-agent
     restart: unless-stopped
     network_mode: host
@@ -124,7 +124,7 @@ services:
       HUB_URL: "${BESZEL_HUB_URL}"
   speedtest:
     container_name: speedtest
-    image: ghcr.io/librespeed/speedtest:6
+    image: ghcr.io/librespeed/speedtest:6@sha256:bc34bf69b6c102b23ab81b6e77beb7cce321fb0d3be33ec6e80edef3e9dd8bab
     restart: always
     environment:
       MODE: standalone

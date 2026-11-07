@@ -1,0 +1,26 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":pinAllExceptPeerDependencies"
+  ],
+  "docker-compose": {
+    "fileMatch": [
+      "^docker-compose\\.yml$"
+    ]
+  },
+  "packageRules": [
+    {
+      "matchDatasources": ["docker"],
+      "pinDigests": true
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["postgres", "odoo"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    }
+  ],
+  "rebaseWhen": "behind-base-branch",
+  "semanticCommits": "enabled"
+}

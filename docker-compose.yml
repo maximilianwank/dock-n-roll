@@ -57,7 +57,7 @@ services:
       - 8.8.8.8
   odoo:
     container_name: odoo
-    image: odoo:18@sha256:f61d3e36eb699e63557bbcdf4d7bd659e51418c326009e6574565d87e1d9026d
+    image: odoo:18@sha256:d0b20aa4ec8a4d97ca096ada36275d77963d571c1cb1cceca69faf6098326c83
     depends_on:
       - postgres
     environment:
